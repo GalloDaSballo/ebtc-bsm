@@ -36,4 +36,20 @@ contract CryticToFoundry is Test, TargetFunctions, FoundryAsserts {
         property_total_minted_eq_total_asset_deposits();
 
     }
+
+
+    function test_can_I_scam() public {
+        bsmTester_setFeeToSell(123);
+        bsmTester_setFeeToBuy(123);
+
+        bsmTester_sellAsset(1e18);
+
+        console2.log("ebtc b4", mockEbtcToken.balanceOf(_getActor()));
+        console2.log("asset b4", mockAssetToken.balanceOf(_getActor()));
+
+        bsmTester_buyAsset(1e10);
+
+        console2.log("ebtc after", mockEbtcToken.balanceOf(_getActor()));
+        console2.log("asset after", mockAssetToken.balanceOf(_getActor()));
+    }
 }

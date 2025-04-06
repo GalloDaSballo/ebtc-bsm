@@ -20,7 +20,7 @@ import {IEscrow} from "./Dependencies/IEscrow.sol";
 contract EbtcBSM is IEbtcBSM, Pausable, Initializable, AuthNoOwner {
     using SafeERC20 for IERC20;
 
-    uint256 internal immutable ASSET_TOKEN_PRECISION;
+    uint256 public immutable ASSET_TOKEN_PRECISION;
 
     /// @notice Basis points constant for percentage calculations
     uint256 public constant BPS = 10000;
