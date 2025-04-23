@@ -7,7 +7,7 @@ import "forge-std/console2.sol";
 
 import {TargetFunctions} from "./TargetFunctions.sol";
 
-// forge test --match-contract ForkToFoundry -vv --rpc-url https://eth-mainnet.g.alchemy.com/v2/mUhSl9trIQUL4usawoforWzPFxtruAm7
+// forge test --match-contract ForkToFoundry -vv --rpc-url RPC
 contract ForkToFoundry is Test, TargetFunctions, FoundryAsserts {
     function setUp() public {
         setup();
@@ -23,7 +23,7 @@ contract ForkToFoundry is Test, TargetFunctions, FoundryAsserts {
         bsmTester_updateEscrow();
     }
 
-    // forge test --match-test test_property_total_minted_eq_total_asset_deposits_0 -vvv  --rpc-url https://eth-mainnet.g.alchemy.com/v2/mUhSl9trIQUL4usawoforWzPFxtruAm7
+    // forge test --match-test test_property_total_minted_eq_total_asset_deposits_0 -vvv  --rpc-url RPC
     function test_property_total_minted_eq_total_asset_deposits_0() public {
 
         bsmTester_sellAsset(2);
@@ -34,7 +34,7 @@ contract ForkToFoundry is Test, TargetFunctions, FoundryAsserts {
 
     }
 
-    // forge test --match-test test_bsmTester_sellAsset_0 -vvv --rpc-url https://eth-mainnet.g.alchemy.com/v2/mUhSl9trIQUL4usawoforWzPFxtruAm7
+    // forge test --match-test test_bsmTester_sellAsset_0 -vvv --rpc-url RPC
 function test_bsmTester_sellAsset_0() public {
 
     bsmTester_sellAsset(1e6);
