@@ -7,18 +7,12 @@ import "forge-std/console2.sol";
 
 import {TargetFunctions} from "./TargetFunctions.sol";
 
-// forge test --match-contract CryticToFoundry -vv
-contract CryticToFoundry is Test, TargetFunctions, FoundryAsserts {
+// forge test --match-contract ForkToFoundry -vv --rpc-url URL
+contract ForkToFoundry is Test, TargetFunctions, FoundryAsserts {
     function setUp() public {
         setup();
-
-        vm.label(address(mockAssetToken), "mockAssetToken");
-        vm.label(address(mockEbtcToken), "mockEbtcToken");
-        vm.label(address(second_actor), "second_actor");
-        vm.label(address(this), "actor");
-        vm.label(address(bsmTester), "bsmTester");
-        vm.label(address(techOpsMultisig), "techOpsMultisig");
-        vm.label(address(escrow), "escrow");
+        _setupFork();
+        _govFuzzing();
     }
 
     // forge test --match-test test_crytic -vvv
