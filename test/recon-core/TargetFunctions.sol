@@ -24,6 +24,8 @@ abstract contract TargetFunctions is AdminTargets, InlinedTests, ManagersTargets
         return _amount * 1e18 / bsmTester.ASSET_TOKEN_PRECISION();
     }
 
+    bool bsmTester_buyAsset_canary;
+
     function bsmTester_buyAsset(uint256 _ebtcAmountIn)
         public
         updateGhostsWithType(OpType.BUY_ASSET_WITH_EBTC)
@@ -36,15 +38,30 @@ abstract contract TargetFunctions is AdminTargets, InlinedTests, ManagersTargets
         if(bsmTester.feeToBuyBPS() > 0) {
             lt(_toEbtcPrecision(assetOut), _ebtcAmountIn,  "Asset Out is less than eBTC In when you have fees");
         }
+
+        bsmTester_buyAsset_canary = true;
     }
 
+    function canary_buyAsset() public {
+        t(!bsmTester_buyAsset_canary, "bsmTester_buyAsset_canary");
+    }
+
+    bool bsmTester_sellAsset_canary;
     function bsmTester_sellAsset(uint256 _assetAmountIn) public updateGhosts asActor {
         uint256 eBTCOut = bsmTester.sellAsset(_assetAmountIn, _getActor(), 0);
+
+        bsmTester.sellAsset(_assetAmountIn, _getActor(), 0);
 
         // Inlined test for rounding
         if(bsmTester.feeToSellBPS() > 0) {
             lt(_toAssetPrecision(eBTCOut), _assetAmountIn,  "eBTC Is less than asset amt in due to fees");
         }
+        
+        bsmTester_sellAsset_canary = true;
+    }
+
+    function canary_sellAsset() public {
+        t(!bsmTester_sellAsset_canary, "bsmTester_sellAsset_canary");
     }
 
     // Donations directly to the underlying vault
