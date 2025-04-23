@@ -10,12 +10,20 @@ import {TargetFunctions} from "./TargetFunctions.sol";
 // forge test --match-contract ForkToFoundry -vv --rpc-url RPC
 contract ForkToFoundry is Test, TargetFunctions, FoundryAsserts {
     function setUp() public {
+        // add your rpc url to the .env file to run tests using a forked chain state
+        string memory FORK_RPC_URL = vm.envString("MAINNET_RPC_URL");
+        uint256 FORK_BLOCK_NUMBER = vm.envUint("MAINNET_BLOCK_NUMBER");
+
+        // create a fork from the given rpc url at the block number set in Setup contract
+        vm.createSelectFork(FORK_RPC_URL, FORK_BLOCK_NUMBER);
+
         setup();
+        
+
         _setupFork();
         _govFuzzing();
 
-        vm.warp(1745430839);
-        vm.roll(22333324);
+
     }
 
     // forge test --match-test test_crytic -vvv
@@ -23,8 +31,8 @@ contract ForkToFoundry is Test, TargetFunctions, FoundryAsserts {
         bsmTester_updateEscrow();
     }
 
-    // forge test --match-test test_property_total_minted_eq_total_asset_deposits_0 -vvv  --rpc-url RPC
-    function test_property_total_minted_eq_total_asset_deposits_0() public {
+    // forge test --match-test test_property_total_minted_eq_total_asset_deposits_fork -vvv  --rpc-url RPC
+    function test_property_total_minted_eq_total_asset_deposits_fork() public {
 
         bsmTester_sellAsset(2);
 
