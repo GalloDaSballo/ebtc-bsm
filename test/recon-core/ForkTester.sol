@@ -13,8 +13,5 @@ contract ForkTester is TargetFunctions, CryticAsserts {
         setup();
         _setupFork();
         _govFuzzing();
-
-        vm.warp(1745430839);
-        vm.roll(22333324);
     }
 }

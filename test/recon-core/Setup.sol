@@ -82,6 +82,9 @@ abstract contract Setup is BaseSetup, BSMBase, ActorManager, AssetManager {
 
 
     function _setupFork() internal {
+        vm.warp(1745430839);
+        vm.roll(22333324);
+
         defaultGovernance = address(0xaDDeE229Bd103bb5B10C3CdB595A01c425dd3264);
         authority = Governor(address(0x2A095d44831C26cFB6aCb806A6531AE3CA32DBc1));
 
