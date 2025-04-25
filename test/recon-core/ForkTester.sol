@@ -6,7 +6,7 @@ import {CryticAsserts} from "@chimera/CryticAsserts.sol";
 
 import {vm} from "@chimera/Hevm.sol";
 
-// echidna . --contract ForkTester --config echidna.yaml --format text --workers 16 --test-limit 1000000 --rpc-url RPC --rpc-block-number 22333324
+// echidna . --contract ForkTester --config echidna.yaml --format text --workers 16 --test-limit 1000000 --rpc-url https://eth-mainnet.g.alchemy.com/v2/mUhSl9trIQUL4usawoforWzPFxtruAm7 --rpc-block 22333324     
 // medusa fuzz
 contract ForkTester is TargetFunctions, CryticAsserts {
     constructor() payable {

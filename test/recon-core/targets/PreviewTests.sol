@@ -11,6 +11,8 @@ abstract contract PreviewTests is BaseTargetFunctions, Properties {
         uint256 amtOut;
         bool previewRevert;
 
+        require(_ebtcAmountIn <= mockEbtcToken.balanceOf(_getActor()), "Must have eBTC");
+
         try bsmTester.previewBuyAsset(_ebtcAmountIn) returns (uint256 amt) {
             amtOut = amt;
         } catch {
@@ -34,6 +36,8 @@ abstract contract PreviewTests is BaseTargetFunctions, Properties {
     function equivalence_bsm_previewSellAsset(uint256 _assetAmountIn) public stateless {
         uint256 amtOut;
         bool previewRevert;
+
+        require(_assetAmountIn <= mockAssetToken.balanceOf(_getActor()), "Must have Asset");
 
         try bsmTester.previewSellAsset(_assetAmountIn) returns (uint256 amt) {
             amtOut = amt;
@@ -61,6 +65,8 @@ abstract contract PreviewTests is BaseTargetFunctions, Properties {
         uint256 amtOut;
         bool previewRevert;
 
+        require(_ebtcAmountIn <= mockEbtcToken.balanceOf(_getActor()), "Must have eBTC");
+
         try bsmTester.previewBuyAssetNoFee(_ebtcAmountIn) returns (uint256 amt) {
             amtOut = amt;
         } catch {
@@ -85,6 +91,8 @@ abstract contract PreviewTests is BaseTargetFunctions, Properties {
     function equivalence_bsm_previewSellAssetNoFee(uint256 _assetAmountIn) public stateless {
         uint256 amtOut;
         bool previewRevert;
+
+        require(_assetAmountIn <= mockAssetToken.balanceOf(_getActor()), "Must have Asset");
 
         try bsmTester.previewSellAssetNoFee(_assetAmountIn) returns (uint256 amt) {
             amtOut = amt;
